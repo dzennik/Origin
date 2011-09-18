@@ -1,6 +1,6 @@
 <?php
 
-class Model_Origin_Entity
+class Origin_Entity
 {
     public function __construct() {
     }

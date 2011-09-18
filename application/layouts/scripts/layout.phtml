@@ -8,19 +8,13 @@
 
     <script type="text/javascript">JSCLASS_PATH = '/js/library/js-class/min/'</script>
     <script type="text/javascript" src="/js/library/js-class/min/loader-browser.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="/js/library/extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="extjs/ext-debug.js"></script>
     <script type="text/javascript" src="/js/origin/base.js"></script>
 </head>
 <body>
-    <div id="header" style="background-color: #EEEEEE; height: 30px;">
-        <div id="header-logo" style="float: left">
-            <b>ZF Quickstart Application</b>
-        </div>
-        <div id="header-navigation" style="float: right">
-            <a href="<?php echo $this->url(array('controller' => 'index'), 'default', true) ?>">Guestbook</a>
-        </div>
-    </div>
-
-    <?php echo $this->layout()->content ?>
-
+    <?php echo $this->render('pages/index.phtml'); ?>
 </body>
 </html>

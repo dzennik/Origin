@@ -13,7 +13,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $autoloader = Zend_Loader_Autoloader::getInstance();
 
-        $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
+        $modelLoader = new Zend_Loader_Autoloader_Resource(array(
             'basePath'      => APPLICATION_PATH,
             'namespace'     => '',
             'resourceTypes' => array(
@@ -24,7 +24,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         ));
 
-        $autoloader->pushAutoloader($resourceLoader);
+        $originLoader = new Zend_Loader_Autoloader_Resource(array(
+            'basePath'      => PROJECT_PATH,
+            'namespace'     => '',
+            'resourceTypes' => array(
+                'model' => array(
+                    'namespace' => 'Origin',
+                    'path'      => 'library/Origin/',
+                )
+            )
+        ));
+
+        $autoloader->pushAutoloader($originLoader);
+        $autoloader->pushAutoloader($modelLoader);
     }
 
     protected function _initConfig()
