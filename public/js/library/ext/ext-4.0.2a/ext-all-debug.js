@@ -22539,7 +22539,6 @@ Ext.define('Ext.util.KeyMap', {
                 i,
                 len,
                 keydownEvent = new Ext.EventObjectImpl(event);
-                
             
             for (i = 0, len = keyCode.length; i < len; ++i) {
                 if (key === keyCode[i]) {

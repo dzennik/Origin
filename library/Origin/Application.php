@@ -49,6 +49,7 @@ class Origin_Application extends Zend_Application
 
         $this->_view->addScriptPath(APPLICATION_PATH . '/layouts/scripts/');
         $this->_view->addScriptPath(APPLICATION_PATH . '/views/scripts/');
+        $this->_view->addHelperPath(LIBRARY_PATH . '/Origin/View/Helper', 'Origin_View_Helper_');
 
         echo $this->_view->render('layout.phtml');
     }

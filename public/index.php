@@ -8,7 +8,10 @@ defined('PROJECT_PATH')
     || define('PROJECT_PATH', realpath(dirname(__FILE__) . '/../'));
 
 defined('PUBLIC_PROJECT_PATH')
-    || define('PROJECT_PATH', realpath(dirname(__FILE__) . '/'));
+    || define('PUBLIC_PROJECT_PATH', realpath(dirname(__FILE__) . '/'));
+
+defined('LIBRARY_PATH')
+    || define('LIBRARY_PATH', realpath(dirname(__FILE__) . '/../library'));
 
 // Define application environment
 defined('APPLICATION_ENV')

@@ -2,17 +2,18 @@
 <?php echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <base href="<?php echo $this->baseUrl(); ?>" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Zend Framework Quickstart Application</title>
+    <title>Origin - First Application</title>
     <?php //echo $this->headLink()->appendStylesheet('/css/global.css') ?>
 
-    <script type="text/javascript">JSCLASS_PATH = '/js/library/js-class/min/'</script>
-    <script type="text/javascript" src="/js/library/js-class/min/loader-browser.js"></script>
+<!--    <script type="text/javascript">JSCLASS_PATH = '/js/library/js-class/min/'</script>
+    <script type="text/javascript" src="/js/library/js-class/min/loader-browser.js"></script>-->
 
 
-    <link rel="stylesheet" type="text/css" href="/js/library/extjs/resources/css/ext-all.css">
-    <script type="text/javascript" src="extjs/ext-debug.js"></script>
-    <script type="text/javascript" src="/js/origin/base.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/library/ext/ext-4.0.2a/resources/css/ext-all.css">
+    <script type="text/javascript" src="/js/library/ext/ext-4.0.2a/ext-debug.js"></script>
+    <script type="text/javascript" src="/js/origin/app.js"></script>
 </head>
 <body>
     <?php echo $this->render('pages/index.phtml'); ?>
