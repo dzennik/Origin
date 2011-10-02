@@ -12,7 +12,13 @@ class Origin_Application extends Zend_Application
     /**
          *  @var Zend_VIew
          */
-    private $_view;
+    protected $_view;
+
+    /**
+         *  @var Origin_Request_Request
+         */
+    protected $_request;
+    protected $_dbConnection;
 
     private function _init()
     {
@@ -30,6 +36,12 @@ class Origin_Application extends Zend_Application
         ));
 
         $autoloader->pushAutoloader($originLoader);
+
+        $this->_dbConnection = Origin_Db::connection(); // connect to db
+
+        $this->_request = new Origin_Controller_Request(); // request object
+
+        Zend_Registry::set('app', $this);
     }
 
     public function __construct($environment, $options = null)
@@ -41,16 +53,6 @@ class Origin_Application extends Zend_Application
 
     public function run()
     {
-        $bootstrap  = $this->getBootstrap();
-
-        $view = $bootstrap->getResource('view');
-
-        $this->_view = $bootstrap->getResource('view');
-
-        $this->_view->addScriptPath(APPLICATION_PATH . '/layouts/scripts/');
-        $this->_view->addScriptPath(APPLICATION_PATH . '/views/scripts/');
-        $this->_view->addHelperPath(LIBRARY_PATH . '/Origin/View/Helper', 'Origin_View_Helper_');
-
-        echo $this->_view->render('layout.phtml');
+        $this->_request->execute();
     }
 }

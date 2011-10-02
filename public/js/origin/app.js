@@ -14,7 +14,6 @@ Origin.baseUrl      = App.baseUrl + 'js/origin/';
 Origin.appUrlDirect = Origin.baseUrl + 'app';
 Origin.appUrl       = Origin.appUrlDirect + '/';
 
-
 Ext.require([
     'Ext.tab.*',
     'Ext.window.*',
@@ -66,13 +65,25 @@ Ext.application({
                     xtype: 'tabpanel',
                     items: [{
                         title: 'Bogus Tab',
-                        html: 'Hello world 1'
+                        items: [{
+                            xtype: 'button',
+                            text: 'Action',
+                            handler: function() {
+                                Ext.Ajax.request({
+                                    url: Origin.baseUrl,
+                                    method: 'POST',
+                                    params: {
+                                        id: 1
+                                    }
+                                });
+                            }
+                        }]
                     }, {
                         title: 'Another Tab',
                         html: 'Hello world 2'
                     }, {
                         title: 'Closable Tab',
-                        html: 'Hello world 3',
+                        html: '',
                         closable: true
                     }]
                 }]
