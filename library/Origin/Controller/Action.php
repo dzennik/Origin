@@ -19,18 +19,10 @@ class Origin_Controller_Action extends Origin_Property
 
     public function execute()
     {
-        $path = explode('->', $this->_action);
-
         try {
-            foreach ($path as $key => $value) {
-                $path[$key] = ucfirst($value);
-            }
+            $accessClassName = Origin_Helper_Name::getClass('Origin_Controller_Access_', $this->_action, '-');
 
-            $className = implode('_', $path);
-
-            $accessClassName = 'Origin_Controller_Access_' . $className;
-
-            $actionClassName = 'Origin_Controller_Action_' . $className;
+            $actionClassName = Origin_Helper_Name::getClass('Origin_Controller_Action_', $this->_action, '-');
 
             $accessClass = new $accessClassName($this->_params);
 
@@ -43,7 +35,6 @@ class Origin_Controller_Action extends Origin_Property
             $class = new $actionClassName($this->_params);
 
             $class->execute();
-
         } catch (Exception $e) {
             throw new Exception('Invalid action for execution. Action Name: ' . $action);
         }

@@ -6,15 +6,18 @@
  * To change this template use File | Settings | File Templates.
  */
 
-Ext.define('Origin.store.Entities', {
+Ext.define('Origin.store.Collections', {
     extend: 'Ext.data.TreeStore',
     proxy: {
         type: 'ajax',
-        url: Origin.appUrl + 'data/entities.js'
+        baseUrl: Origin.baseUrl,
+        url: 'data-get/entity/collection/handler/get-list'
     },
     root: {
-        text: 'Entities',
-        id: 'root',
-        expanded: true
+        leaf : false,
+        draggable : false,
+        editable : false,
+        text: 'Collections',
+        id: 'root'
     }
 });

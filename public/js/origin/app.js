@@ -51,15 +51,15 @@ Ext.application({
                 layout: 'border',
                 bodyStyle: 'padding: 5px;',
                 items: [{
+                    id: 'collection-tree-panel',
                     region: 'west',
+                    xtype: 'collections.Tree',
                     title: 'Navigation',
                     width: 200,
                     split: true,
                     collapsible: true,
                     floatable: false,
-                    items: [
-                        {xtype: 'entity.Tree'}
-                    ]
+                    layout: 'fit'
                 }, {
                     region: 'center',
                     xtype: 'tabpanel',
@@ -69,13 +69,26 @@ Ext.application({
                             xtype: 'button',
                             text: 'Action',
                             handler: function() {
-                                Ext.Ajax.request({
+                                /*Ext.Ajax.request({
                                     url: Origin.baseUrl,
                                     method: 'POST',
                                     params: {
-                                        id: 1
+                                        action: 'data-get'
+                                    },
+                                    success: function (response) {
+                                        var nodes = Ext.decode(response.responseText);
+
+                                        var tree = Ext.getCmp('my-tree');
+
+                                        var rootNode = tree.getStore().getRootNode();
+
+                                        rootNode.removeAll();
+
+                                        Ext.Array.each(nodes, function (node) {
+                                            rootNode.appendChild(rootNode.createNode(node));
+                                        });
                                     }
-                                });
+                                });*/
                             }
                         }]
                     }, {
@@ -88,6 +101,8 @@ Ext.application({
                     }]
                 }]
             });
+
+            Ext.getCmp('collection-tree-panel').getStore().getRootNode().expand();
         }
     },
 
@@ -109,22 +124,5 @@ Ext.application({
             ctrl: true,
             fn: app.board.openPanel
         }]);
-
-        console.log('ready');
     }
 });
-
-
-/*JS.require('JS.Class', function() {
-   var Animal = new JS.Class({
-        initialize: function(name) {
-            this.name = name;
-        },
-
-        speak: function(things) {
-            return 'My name is ' + this.name + ' and I like ' + things;
-        }
-    });
-
-    var cat = new Animal('Kitty');
-});*/

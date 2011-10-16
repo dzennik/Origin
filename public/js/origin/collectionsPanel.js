@@ -6,9 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 
-Ext.define('Ext.origin.EntitiesPanel' ,{
+Ext.define('Ext.origin.collectionsPanel' ,{
     extend: 'Ext.tree.Panel',
-    alias : 'widget.EntitiesPanel',
+    alias : 'widget.CollectionsPanel',
     title : 'All Users',
     initComponent: function() {
         this.store = Ext.create('Ext.data.TreeStore', {

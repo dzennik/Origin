@@ -6,13 +6,12 @@
  * To change this template use File | Settings | File Templates.
  */
 
-Ext.define('Origin.view.entity.Tree' ,{
+Ext.define('Origin.view.collections.Tree' ,{
     extend: 'Ext.tree.Panel',
-    alias : 'widget.entity.Tree',
+    alias : 'widget.collections.Tree',
 
     title : 'Tree',
-    store: 'Entities',
-
+    store: 'Collections',
     initComponent: function() {
         this.callParent(arguments);
     }

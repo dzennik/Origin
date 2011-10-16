@@ -12,6 +12,26 @@ class Origin_Db extends Origin_Property
     protected $_connection;
     protected static $_instance;
 
+    protected function __construct()
+    {
+        $this->_connection = new Mongo();
+    }
+
+    public static function getArray($cursor)
+    {
+        $result = array();
+        foreach ($cursor as $value) {
+            $result[] = $value;
+        }
+
+        return $result;
+    }
+
+    /**
+        *  Return db instance
+        *  @param string $name name of database
+        *  @return MongoDB
+        */
     public static function get($name = 'origin')
     {
         $connection = Origin_Db::connection();
@@ -35,10 +55,5 @@ class Origin_Db extends Origin_Property
         }
 
         return Origin_Db::$_instance;
-    }
-
-    protected function __construct()
-    {
-        $this->_connection = new Mongo();
     }
 }

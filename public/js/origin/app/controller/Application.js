@@ -10,11 +10,11 @@ Ext.define('Origin.controller.Application', {
     extend: 'Ext.app.Controller',
 
     stores: [
-        'Entities'
+        'Collections'
     ],
 
     views: [
-        'entity.Tree'
+        'collections.Tree'
     ],
 
     init: function () {

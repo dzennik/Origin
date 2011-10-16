@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
  
-class Origin_Model_Document_Entity extends Origin_Model_Type_Tree
+class Origin_Model_Entity_Document extends Origin_Model_Type_Tree
 {
     public function __construct()
     {

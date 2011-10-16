@@ -9,12 +9,12 @@
  
 abstract class Origin_Controller_Action_Abstract extends Origin_Property
 {
-    protected $_params;
+    protected $_params = array();
 
     public abstract function execute();
 
-    public function __construct($_params)
+    public function __construct($params)
     {
-        $this->_params = $this->_params;
+        $this->_params = $params;
     }
 }

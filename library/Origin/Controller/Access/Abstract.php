@@ -13,8 +13,8 @@ abstract class Origin_Controller_Access_Abstract extends Origin_Property
 
     public abstract function check();
 
-    public function __construct($_params)
+    public function __construct($params)
     {
-        $this->_params = $this->_params;
+        $this->_params = $params;
     }
 }

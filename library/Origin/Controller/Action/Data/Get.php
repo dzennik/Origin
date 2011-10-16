@@ -7,3 +7,5 @@
  * To change this template use File | Settings | File Templates.
  */
  
+class Origin_Controller_Action_Data_Get extends Origin_Controller_Action_Data_Abstract
+{}

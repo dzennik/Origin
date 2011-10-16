@@ -38,7 +38,7 @@ $application = new Origin_Application(
 
 $application->bootstrap()->run();
 
-$m = new Mongo();
+/*$m = new Mongo();
 
 $db = $m->mediabook;
 $book4 = $db->book->findOne(array('name' => '#4'));
@@ -46,6 +46,6 @@ $book4 = $db->book->findOne(array('name' => '#4'));
 $bookRef4 = MongoDBRef::create('books', $book4['_id']);
 
 
-$db->book->update(array("name" => "#3"), array('$push' => array('refs' => $bookRef4)));
+$db->book->update(array("name" => "#3"), array('$push' => array('refs' => $bookRef4)));*/
 
 //$db->book->remove(array('_id' => new MongoId("4e6c805d86f1b5b3c7d60f1c")));
