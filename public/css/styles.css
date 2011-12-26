@@ -1,0 +1,2 @@
+.x-origin-selector { display: hidden; }
+.x-origin-selector.move { display: block; position: absolute; cursor: pointer; border: 1px solid red; }

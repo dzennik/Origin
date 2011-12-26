@@ -9,37 +9,72 @@
  
 class Origin_Model_Entity_Collection extends Origin_Model_Type_Tree
 {
-    public function getChildren($documentKey, $document)
+    protected $_treeItems = array();
+
+    protected function _getIconCls($id)
     {
-        $children = array();
+        $iconCls = 'hierarchy';
 
-        foreach ($document as $key => $value) {
-            if ($key === '_id') {
-                continue;
-            }
-
-            if (is_object($value)) {
-                continue;
-            }
-
-            if (is_array($value)) {
-                $children[] = array(
-                    'id'       => $documentKey . '.' . $key,
-                    'text'     => $key,
-                    'leaf'     => false,
-                    'children' => $this->getChildren($documentKey . '.' . $key, $value)
-                );
-                continue;
-            }
-
-            $children[] = array(
-                'id'       => $documentKey . '.' . $key,
-                'text'     => $key,
-                'leaf'     => true
-            );
+        if (is_numeric($id)) {
+            $cls = 'item';
+            $iconCls = 'text-list-numbers';
         }
 
-        return $children;
+        return $iconCls;
+    }
+
+    protected function _listItem($id, $key, $value, $level, $type)
+    {
+        if (!isset($this->_treeItems[$type])) {
+            $className = 'Origin_Model_Entity_Mongo_Tree_' . ucfirst($type);
+            $this->_treeItems[$type] = new $className(array());
+        }
+
+        $this->_treeItems[$type]->setData(array(
+            'id'     => $id,
+            'key'    => $key,
+            'value'  => $value,
+            'level'  => $level,
+            'type'   => $type
+        ));
+
+        $item = $this->_treeItems[$type]->getItem();
+
+        if (!$item['leaf']) {
+            if ($value instanceof MongoCollection) {
+                /**
+                             * @var $value MongoCollection
+                             */
+                $value = $value->find(array());
+            }
+
+            $item['children'] = $this->_getChildren($id, $value, $item['level']);
+        }
+
+        return $item;
+
+        switch ($type) {
+            case 'array':
+                $cls = 'array';
+                $iconCls = $this->_getIconCls($key);
+
+                return array(
+
+                );
+                break;
+
+            case 'param':
+                return array(
+                    'id'       => $id,
+                    'text'     => $key,
+                    'leaf'     => true,
+                    'cls'     => 'param',
+                    'iconCls' => 'param-hand'
+                );
+                break;
+        }
+
+        return array();
     }
 
     public function getList()
@@ -49,12 +84,8 @@ class Origin_Model_Entity_Collection extends Origin_Model_Type_Tree
         if ($this->_params['node'] === 'root') {
             $collections = Origin_Db::get()->listCollections();
 
-            foreach ($collections as $collection) {
-                $list[] = array(
-                    'id'   => lcfirst($collection->getName()),
-                    'text' => $collection->getName(),
-                    'leaf' => false
-                );
+            foreach ($collections as $key => $collection) {
+                $list[] = $this->_listItem(lcfirst($collection->getName()), $key, $collection, 1, 'collection');
             }
         } else {
             $collection = $this->_params['node'];
@@ -64,17 +95,13 @@ class Origin_Model_Entity_Collection extends Origin_Model_Type_Tree
             $documents = $collection->find();
 
             foreach ($documents as $documentKey => $document) {
-                $list[] = array(
-                    'id'       => $documentKey,
-                    'text'     => $documentKey,
-                    'leaf'     => false,
-                    'children' => $this->getChildren($documentKey, $document)
-                );
+                $id = lcfirst($collection->getName()) . '.' . $documentKey;
+
+                $list[] = $this->_listItem($id, $documentKey, $document, 2, 'document');
             }
         }
 
 
-        $response = new Origin_Controller_Response();
-        $response->json($list);
+        $this->_result($list);
     }
 }

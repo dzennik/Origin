@@ -6,25 +6,36 @@
  * To change this template use File | Settings | File Templates.
  */
 
+Ext.require([
+    'Origin.controller.Collection'
+]);
+
 Ext.define('Origin.controller.Application', {
     extend: 'Ext.app.Controller',
 
     stores: [
-        'Collections'
+        'Collections',
+        'Records'
     ],
 
     views: [
-        'collections.Tree'
+        'collections.PropertyGrid',
+        'collections.TreePanel.ContextMenu',
+        'collections.TreePanel',
+        'records.TreePanel',
+        'control.Window'
     ],
 
     init: function () {
         console.log('Initialized Application!');
 
-/*        this.control({
-            'viewport > panel': {
-                render: this.onPanelRendered
-            }
-        });*/
+        //var collectionController = new Origin.controller.Collection();
+
+//        this.control({
+//            '[xtype=control.Window] > [xtype=collections.TreePanel]': {
+//                itemclick: collectionController.itemChange
+//            }
+//        });
 
     }
 });

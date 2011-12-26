@@ -17,6 +17,8 @@ Ext.define('Origin.store.Collections', {
         leaf : false,
         draggable : false,
         editable : false,
+        cls: 'root',
+        iconCls: 'tree',
         text: 'Collections',
         id: 'root'
     }
