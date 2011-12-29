@@ -13,7 +13,7 @@ class Origin_Controller_Response extends Zend_Controller_Response_Http
     {
         $this->setBody(json_encode(Origin_Db::getArray($data)));
 
-        $this->setHeader('Content-Type', 'json');
+        $this->setHeader('Content-Type', 'application/json');
 
         $this->sendHeaders();
         $this->sendResponse();

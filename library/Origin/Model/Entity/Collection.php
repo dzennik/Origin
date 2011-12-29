@@ -52,29 +52,6 @@ class Origin_Model_Entity_Collection extends Origin_Model_Type_Tree
         }
 
         return $item;
-
-        switch ($type) {
-            case 'array':
-                $cls = 'array';
-                $iconCls = $this->_getIconCls($key);
-
-                return array(
-
-                );
-                break;
-
-            case 'param':
-                return array(
-                    'id'       => $id,
-                    'text'     => $key,
-                    'leaf'     => true,
-                    'cls'     => 'param',
-                    'iconCls' => 'param-hand'
-                );
-                break;
-        }
-
-        return array();
     }
 
     public function getList()

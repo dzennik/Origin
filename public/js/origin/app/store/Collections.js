@@ -8,6 +8,7 @@
 
 Ext.define('Origin.store.Collections', {
     extend: 'Ext.data.TreeStore',
+    model: 'Origin.model.Collection',
     proxy: {
         type: 'ajax',
         baseUrl: Origin.baseUrl,

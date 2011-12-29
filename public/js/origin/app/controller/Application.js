@@ -18,6 +18,10 @@ Ext.define('Origin.controller.Application', {
         'Records'
     ],
 
+    models: [
+        'Collection'
+    ],
+
     views: [
         'collections.PropertyGrid',
         'collections.TreePanel.ContextMenu',

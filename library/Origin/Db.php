@@ -20,8 +20,8 @@ class Origin_Db extends Origin_Property
     public static function getArray($cursor)
     {
         $result = array();
-        foreach ($cursor as $value) {
-            $result[] = $value;
+        foreach ($cursor as $key => $value) {
+            $result[$key] = $value;
         }
 
         return $result;

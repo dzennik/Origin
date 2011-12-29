@@ -21,10 +21,18 @@ Ext.require([
     'Ext.util.*',
     'Ext.tree.*',
     'Ext.grid.*',
+    'Ext.data.AbstractStore',
     'Ext.container.Viewport',
     'Ext.layout.container.Accordion',
     'Ext.layout.container.Border'
 ]);
+
+Ext.onReady(function() {
+    // For Ext.tree.Panel: haven't implementation of indexOf method which called from Ext.Editor
+    Ext.override(Ext.data.AbstractStore,{
+        indexOf: Ext.emptyFn
+    });
+});
 
 Ext.application({
     appFolder: Origin.appUrlDirect,
@@ -45,10 +53,7 @@ Ext.application({
                 split: true
             },
             items: [{
-                region: 'north',
-                html: 'north'
-            },{
-                region: 'west',
+                region: 'center',
                 layout: 'fit',
                 minWidth: 200,
                 width: 500,
@@ -68,15 +73,6 @@ Ext.application({
 
                     }
                 }]
-            },{
-                region: 'center',
-                html: 'center'
-            },{
-                region: 'east',
-                html: 'east'
-            },{
-                region: 'south',
-                html: 'south'
             }]
         });
     },

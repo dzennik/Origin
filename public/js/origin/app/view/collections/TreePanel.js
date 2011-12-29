@@ -11,7 +11,28 @@ Ext.define('Origin.view.collections.TreePanel', {
     store: 'Collections',
     alias : 'widget.collections.TreePanel',
     id: 'mongo-editor-tree-panel',
+    useArrows: true,
+
+    columns: [{
+        xtype: 'treecolumn', //this is so we know which column will show the tree
+        text: 'Key',
+        flex: 2,
+        sortable: false,
+        dataIndex: 'text'
+    },{
+        text: 'Value',
+        flex: 1,
+        dataIndex: 'value',
+        editor:{xtype:'textfield',allowBlank:false}
+    }],
+
+    plugins: [
+        Ext.create('Ext.grid.plugin.CellEditing', {clicksToEdit:2})
+    ],
+
     viewConfig: {
+        toggleOnDblClick: false, // important!
+
         stripeRows: true,
         listeners: {
             itemcontextmenu: function(view, record, node, index, e) {
@@ -35,7 +56,7 @@ Ext.define('Origin.view.collections.TreePanel', {
 
                 self.contextMenu.removeAll();
 
-                if (rec.data.cls !== 'root') {
+                if (record.data.cls !== 'root') {
                     self.contextMenu.add(addAction);
                 }
                 self.contextMenu.add(removeAction);
@@ -44,8 +65,6 @@ Ext.define('Origin.view.collections.TreePanel', {
                 return false;
             },
             itemclick: function(view, record, node, index, e, options) {
-                console.log(record);
-
             }
         }
     },
